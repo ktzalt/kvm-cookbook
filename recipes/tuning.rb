@@ -6,3 +6,4 @@ if node[:cpu][0][:flags].include?("ept")
   end
 end
 
+modules "vhost_net"

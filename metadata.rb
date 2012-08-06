@@ -8,6 +8,9 @@ version          "0.1.0"
 depends          "apt"
 depends          "sysctl"
 depends          "modules"
+depends          "ntp"
+depends          "sysfs"
+depends          "iptables"
 
 distros = %w(debian ubuntu)
 

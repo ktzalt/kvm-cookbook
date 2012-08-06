@@ -1,3 +1,4 @@
+
 packages = %w(qemu-kvm libvirt-bin ebtables ipxe)
 
 packages.each do |pkg|

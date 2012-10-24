@@ -4,9 +4,10 @@ include_recipe "sysctl"
 
 include_recipe "modules"
 
-if node[:cpu]["0"][:flags].include?("ept")
+if node[:cpu]["0"][:flags].include?("ept") and node['kernel']['release'] < "3.5"
   sysctl "vm.swappiness" do
     value "0"
+    action :set
   end
 end
 

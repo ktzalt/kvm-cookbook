@@ -11,6 +11,7 @@ depends          "modules"
 depends          "ntp"
 depends          "sysfs"
 depends          "iptables"
+depends          "cpu"
 
 distros = %w(debian ubuntu)
 

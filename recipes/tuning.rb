@@ -28,3 +28,10 @@ include_recipe "sysfs"
 
 #include_recipe "iptables"
 #iptables_rule "correctUdpDhcp"
+
+
+## Don't change the cpu frequency.
+# clock drift (in some cases)
+# Drop performances http://lists.gnu.org/archive/html/qemu-devel/2012-03/msg00842.html
+node.set["cpu"]["governor"] = "performance"
+include_recipe "cpu"

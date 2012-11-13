@@ -20,21 +20,38 @@
 
 include_recipe "kvm::default"
 
+## Install more useful packages
+packages = %w(ebtables kvm-ipxe)
+
+packages.each do |pkg|
+  package pkg do
+    action :install
+  end
+end
+
+
+## Disable swapping when processor is INTEL with EPT instructions 
+# EPT doen't update "last access" in memory.
+# In this case, Linux can put in swap a very used page.
+# This has been fixed in 3.6 and backport on 3.5
 include_recipe "sysctl"
 
-include_recipe "modules"
-
-if node[:cpu]["0"][:flags].include?("ept") and node['kernel']['release'] < "3.5"
+if node['cpu']["0"]['flags'].include?("ept") and node['kernel']['release'] < "3.5"
   sysctl "vm.swappiness" do
     value "0"
     action :set
   end
 end
 
+## Include some useful modules
+include_recipe "modules"
+
+# vhost_net enhance networking performance.
+# libvirt detect and use it when module is loaded.
 modules "vhost_net"
 
 
-include_recipe "sysfs"
+#include_recipe "sysfs"
 #sysfs "Tuning ondemand cpufreq governor" do
 #  name "devices/system/cpu/cpufreq/ondemand/sampling_down_factor"
 #  value "100"

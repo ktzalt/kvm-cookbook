@@ -1,21 +1,40 @@
-= DESCRIPTION:
+# KVM 
+
+## DESCRIPTION
 
 Install KVM Hypervisor on Ubuntu and Debian
 
-= REQUIREMENTS:
+## REQUIREMENTS
 
-== OS
+### OS
 
 * Ubuntu (tested)
 * Debian
 
-== cookbooks
+### Cookbooks
 
 * sysctl : https://github.com/Youscribe/sysctl-cookbook
 * modules : https://github.com/Youscribe/modules-cookbook
 
-= USAGE:
+## USAGE
 
-simply add recipe "kvm" to install kvm
-and
-simply add recipe "kvm::tuning" to profite from some optimizations
+### Default recipe
+
+Detect the server role from OHAI : host or guest. And install minimum packages.
+For security, the default recipe doesn't install a kvm server, you need to install it with kvm::host
+
+### host recipe
+
+Install minimum packages and configuration to do kvm virtualization.
+
+### guest recipe
+
+Install minimum packages and configuration for a kvm guest.
+
+### host-tuning recipe
+
+Install packages and configuration to enhance your kvm host.
+
+### guest-tuning recipe
+
+Install packages and configuration to enhance your kvm guest.

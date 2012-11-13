@@ -20,16 +20,6 @@ include_recipe "sysfs"
 #  value "100"
 #end
 
-# Correct problem with dhcpd and vhost_net
-# http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/ch11s02.html
-# https://bugs.launchpad.net/ubuntu/+source/isc-dhcp/+bug/930962
-
-# suppress because iptables_rules suppress all others rules
-
-#include_recipe "iptables"
-#iptables_rule "correctUdpDhcp"
-
-
 ## Don't change the cpu frequency.
 # clock drift (in some cases)
 # Drop performances http://lists.gnu.org/archive/html/qemu-devel/2012-03/msg00842.html

@@ -5,10 +5,12 @@ Install KVM Hypervisor on Ubuntu and Debian
 = REQUIREMENTS:
 
 == OS
-* Ubuntu
+
+* Ubuntu (tested)
 * Debian
 
 == cookbooks
+
 * sysctl : https://github.com/Youscribe/sysctl-cookbook
 * modules : https://github.com/Youscribe/modules-cookbook
 

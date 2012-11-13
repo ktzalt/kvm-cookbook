@@ -8,10 +8,10 @@ version          "0.2.1"
 
 depends          "ntp", ">= 1.2.0"
 
-suggests         "sysctl"
-suggests         "modules"
-suggests         "sysfs"
-suggests         "cpu"
+depends          "sysctl"
+depends          "modules"
+depends          "sysfs"
+depends          "cpu"
 
 distros = %w(debian ubuntu)
 

@@ -18,4 +18,9 @@
 # limitations under the License.
 #
 
-include_recipe "ntp::disable"
+## Use kvm-clock
+# http://s19n.net/articles/2011/kvm_clock.html
+# Disabling NTP is recommended when using kvm-clock
+if node['os'] == "linux" and node['kernel']['release'] >= "2.6.27"
+  include_recipe "ntp::disable"
+end

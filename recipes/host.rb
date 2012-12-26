@@ -18,9 +18,7 @@
 # limitations under the License.
 #
 
-packages = %w(qemu-kvm libvirt-bin)
-
-packages.each do |pkg|
+node[:kvm][:host][:packages].each do |pkg|
   package pkg do
     action :install
   end

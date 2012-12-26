@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-Install KVM Hypervisor on Ubuntu and Debian
+Install KVM Hypervisor on Ubuntu, Debian, CentOS or RHEL
 
 ## REQUIREMENTS
 
@@ -10,6 +10,8 @@ Install KVM Hypervisor on Ubuntu and Debian
 
 * Ubuntu (tested)
 * Debian
+* CentOS (tested host)
+* RHEL
 
 ### Cookbooks
 

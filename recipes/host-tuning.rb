@@ -20,10 +20,7 @@
 
 include_recipe "kvm::default"
 
-## Install more useful packages
-packages = %w(ebtables kvm-ipxe)
-
-packages.each do |pkg|
+node[:kvm][:host][:tuning][:packages].each do |pkg|
   package pkg do
     action :install
   end
@@ -34,9 +31,9 @@ end
 # EPT doen't update "last access" in memory.
 # In this case, Linux can put in swap a very used page.
 # This has been fixed in 3.6 and backport on 3.5
-include_recipe "sysctl"
-
 if node['cpu']["0"]['flags'].include?("ept") and node['kernel']['release'] < "3.5"
+  include_recipe "sysctl"
+
   sysctl "vm.swappiness" do
     value "0"
     action :set
@@ -44,11 +41,17 @@ if node['cpu']["0"]['flags'].include?("ept") and node['kernel']['release'] < "3.
 end
 
 ## Include some useful modules
-include_recipe "modules"
+case node[:platform]
+when 'debian', 'ubuntu'
+  include_recipe "modules"
 
-# vhost_net enhance networking performance.
-# libvirt detect and use it when module is loaded.
-modules "vhost_net"
+  # vhost_net enhance networking performance.
+  # libvirt detect and use it when module is loaded.
+  modules "vhost_net"
+when 'centos', 'rhel'
+  # vhost_net installed by default
+  # https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/ch11s02.html
+end
 
 
 #include_recipe "sysfs"
@@ -60,5 +63,5 @@ modules "vhost_net"
 ## Don't change the cpu frequency.
 # clock drift (in some cases)
 # Drop performances http://lists.gnu.org/archive/html/qemu-devel/2012-03/msg00842.html
-node.set["cpu"]["governor"] = "performance"
+node.default["cpu"]["governor"] = "performance"
 include_recipe "cpu"

@@ -2,7 +2,7 @@
 case platform
 when 'ubuntu', 'debian'
   default[:kvm][:host][:packages] = %w(qemu-kvm libvirt-bin)
-when 'centos', 'rhel'
+when 'centos', 'redhat'
   default[:kvm][:host][:packages] = %w(qemu-kvm libvirt)
 else
   raise 'unsupported platform'

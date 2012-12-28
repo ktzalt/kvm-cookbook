@@ -2,7 +2,7 @@
 case platform
 when 'ubuntu', 'debian'
   default[:kvm][:host][:tuning][:packages] = %w(ebtables kvm-ipxe)
-when 'centos', 'rhel'
+when 'centos', 'redhat'
   default[:kvm][:host][:tuning][:packages] = %w(ebtables gpxe-roms-qemu)
 else
   raise 'unsupported platform'

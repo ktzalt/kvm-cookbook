@@ -48,7 +48,7 @@ when 'debian', 'ubuntu'
   # vhost_net enhance networking performance.
   # libvirt detect and use it when module is loaded.
   modules "vhost_net"
-when 'centos', 'rhel'
+when 'centos', 'redhat'
   # vhost_net installed by default
   # https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/ch11s02.html
 end

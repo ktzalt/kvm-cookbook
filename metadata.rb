@@ -13,7 +13,7 @@ depends          "modules"
 depends          "sysfs"
 depends          "cpu"
 
-distros = %w(debian centos ubuntu redhat)
+distros = %w(debian centos ubuntu redhat scientific)
 
 distros.each do |dist|
   supports dist

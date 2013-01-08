@@ -27,7 +27,7 @@ node[:kvm][:host][:tuning][:packages].each do |pkg|
 end
 
 
-## Disable swapping when processor is INTEL with EPT instructions 
+## Disable swapping when processor is INTEL with EPT instructions
 # EPT doen't update "last access" in memory.
 # In this case, Linux can put in swap a very used page.
 # This has been fixed in 3.6 and backport on 3.5
@@ -48,7 +48,7 @@ when 'debian', 'ubuntu'
   # vhost_net enhance networking performance.
   # libvirt detect and use it when module is loaded.
   modules "vhost_net"
-when 'centos', 'redhat'
+when 'centos', 'redhat', 'scientific'
   # vhost_net installed by default
   # https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/ch11s02.html
 end

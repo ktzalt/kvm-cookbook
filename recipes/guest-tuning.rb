@@ -19,9 +19,9 @@
 #
 
 node['block_device'].select{|device,info| device =~ /^.d.$/ and info['size'].to_i > 0}.each do |device,info|
-  sysfs "noop scheduler" do
+  sysfs "io scheduler" do
     name "block/#{device}/queue/scheduler"
-    value "noop"
+    value node["kvm"]["guest"]["tuning"]["io_scheduler"]
   end
 end
    

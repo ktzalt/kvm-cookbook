@@ -37,6 +37,12 @@ Install minimum packages and configuration for a kvm guest.
 
 Install packages and configuration to enhance your kvm host.
 
+* Set vm.swappiness = 0 if the kernel < 3.5 and cpu has ept flag.
+* Load vhost_net module on Ubuntu/debian to speed up networking.
+* Avoid cpu frequency change to prevent potential clock drifting.
+
 ### guest-tuning recipe
 
 Install packages and configuration to enhance your kvm guest.
+
+* Change the block IO scheduler according to the attribute default["kvm"]["guest"]["tuning"]["io_scheduler"]. By the default the noop scheduler is used.

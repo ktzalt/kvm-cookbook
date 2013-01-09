@@ -42,12 +42,13 @@ end
 
 ## Include some useful modules
 case node[:platform]
-when 'debian', 'ubuntu'
+when 'debian'
   include_recipe "modules"
 
   # vhost_net enhance networking performance.
   # libvirt detect and use it when module is loaded.
   modules "vhost_net"
+  # The module is set to load in /etc/default/qemu-kvm instead in Ubuntu
 when 'centos', 'redhat', 'scientific'
   # vhost_net installed by default
   # https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/ch11s02.html

@@ -65,3 +65,21 @@ end
 # Drop performances http://lists.gnu.org/archive/html/qemu-devel/2012-03/msg00842.html
 node.default["cpu"]["governor"] = "performance"
 include_recipe "cpu"
+
+# enable/disable ksm. only works on ubuntu so far
+service "qemu-kvm" do
+  action :nothing
+  supports :restart => true
+end
+
+case node[:platform]
+when 'ubuntu'
+  template "/etc/default/qemu-kvm" do
+    source "qemu-kvm.erb"
+    owner "root"
+    group "root"
+    mode 00644
+    notifies :restart, resources(:service => "qemu-kvm")
+  end
+end
+

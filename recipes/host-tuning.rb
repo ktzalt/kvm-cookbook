@@ -84,3 +84,9 @@ when 'ubuntu'
   end
 end
 
+include_recipe "sysfs"
+sysfs "Enable transparent huge pages" do
+  name "kernel/mm/transparent_hugepage/enabled"
+  value "always"
+end
+

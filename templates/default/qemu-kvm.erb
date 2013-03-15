@@ -3,13 +3,9 @@
 # To disable qemu-kvm's page merging feature, set KSM_ENABLED=0 and
 # sudo restart qemu-kvm
 
-<% if node["kvm"]["host"]["tuning"]["ksm_enabled"] %>
-KSM_ENABLED=1
+KSM_ENABLED=<%= node["kvm"]["host"]["tuning"]["ksm_enabled"] ? "1" : "0" -%>
 SLEEP_MILLISECS=200
-<% else %>
-KSM_ENABLED=0
-#SLEEP_MILLISECS=200
-<% end %>
+
 # To load the vhost_net module, which in some cases can speed up
 # network performance, set VHOST_NET_ENABLED to 1.
 VHOST_NET_ENABLED=1

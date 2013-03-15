@@ -88,5 +88,6 @@ include_recipe "sysfs"
 sysfs "Enable transparent huge pages" do
   name "kernel/mm/transparent_hugepage/enabled"
   value "always"
+  only_if do File.exists?("/sys/kernel/mm/transparent_hugepage/enabled") end
 end
 

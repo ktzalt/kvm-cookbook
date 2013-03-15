@@ -18,7 +18,7 @@
 #
 
 if node['virtualization'].has_key?("role") and node['virtualization']['role'] == "guest" and node['virtualization']['system'] == "kvm"
-  include_recipe "kvm::quest"
+  include_recipe "kvm::guest"
 elsif node['virtualization'].has_key?("role") and node['virtualization']['role'] == "host" and node['virtualization']['system'] == "kvm"
   include_recipe "kvm::host"
 end

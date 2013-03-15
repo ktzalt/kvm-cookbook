@@ -68,13 +68,13 @@ node.default["cpu"]["governor"] = "performance"
 include_recipe "cpu"
 
 # enable/disable ksm. only works on ubuntu so far
-service "qemu-kvm" do
-  action :nothing
-  supports :restart => true
-end
-
 case node[:platform]
 when 'ubuntu'
+  service "qemu-kvm" do
+    action :nothing
+    supports :restart => true
+  end
+
   template "/etc/default/qemu-kvm" do
     source "default.qemu-kvm.erb"
     owner "root"

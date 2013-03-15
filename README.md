@@ -15,8 +15,10 @@ Install KVM Hypervisor on Ubuntu, Debian, CentOS or RHEL
 
 ### Cookbooks
 
-* sysctl : https://github.com/Youscribe/sysctl-cookbook
-* modules : https://github.com/Youscribe/modules-cookbook
+* sysctl: https://github.com/Youscribe/sysctl-cookbook
+* modules: https://github.com/Youscribe/modules-cookbook
+* sysfs: https://github.com/Youscribe/sysfs-cookbook
+* cpu: https://github.com/Youscribe/cpu-cookbook
 
 ## USAGE
 

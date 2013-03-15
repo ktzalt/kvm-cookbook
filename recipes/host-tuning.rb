@@ -76,11 +76,11 @@ end
 case node[:platform]
 when 'ubuntu'
   template "/etc/default/qemu-kvm" do
-    source "qemu-kvm.erb"
+    source "default.qemu-kvm.erb"
     owner "root"
     group "root"
     mode 00644
-    notifies :restart, resources(:service => "qemu-kvm")
+    notifies :restart, "service[qemu-kvm]"
   end
 end
 

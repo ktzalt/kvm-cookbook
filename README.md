@@ -40,7 +40,6 @@ Install packages and configuration to enhance your kvm host.
 * Set vm.swappiness = 0 if the kernel < 3.5 and cpu has ept flag.
 * Load vhost_net module on Ubuntu/debian to speed up networking.
 * Avoid cpu frequency change to prevent potential clock drifting.
-* Disable ksm by default
 * Enable transparent huge pages
 
 ### guest-tuning recipe

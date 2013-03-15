@@ -8,5 +8,5 @@ else
   raise 'unsupported platform'
 end
 
-default["kvm"]["host"]["tuning"]["ksm_enabled"] = false
+default["kvm"]["host"]["tuning"]["ksm_enabled"] = true
 

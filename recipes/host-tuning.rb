@@ -42,12 +42,13 @@ end
 
 ## Include some useful modules
 case node[:platform]
-when 'debian', 'ubuntu'
+when 'debian'
   include_recipe "modules"
 
   # vhost_net enhance networking performance.
   # libvirt detect and use it when module is loaded.
   modules "vhost_net"
+  # The module is set to load in /etc/default/qemu-kvm instead in Ubuntu
 when 'centos', 'redhat', 'scientific'
   # vhost_net installed by default
   # https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/ch11s02.html
@@ -65,3 +66,28 @@ end
 # Drop performances http://lists.gnu.org/archive/html/qemu-devel/2012-03/msg00842.html
 node.default["cpu"]["governor"] = "performance"
 include_recipe "cpu"
+
+# enable/disable ksm. only works on ubuntu so far
+case node[:platform]
+when 'ubuntu'
+  service "qemu-kvm" do
+    action :nothing
+    supports :restart => true
+  end
+
+  template "/etc/default/qemu-kvm" do
+    source "default.qemu-kvm.erb"
+    owner "root"
+    group "root"
+    mode 00644
+    notifies :restart, "service[qemu-kvm]"
+  end
+end
+
+include_recipe "sysfs"
+sysfs "Enable transparent huge pages" do
+  name "kernel/mm/transparent_hugepage/enabled"
+  value "always"
+  only_if do File.exists?("/sys/kernel/mm/transparent_hugepage/enabled") end
+end
+

@@ -31,7 +31,7 @@ Install minimum packages and configuration to do kvm virtualization.
 
 ### guest recipe
 
-Install minimum packages and configuration for a kvm guest.
+Disable ntp because kvm-clock is preferred in the guest.
 
 ### host-tuning recipe
 

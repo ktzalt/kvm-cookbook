@@ -22,5 +22,9 @@
 # http://s19n.net/articles/2011/kvm_clock.html
 # Disabling NTP is recommended when using kvm-clock
 if node['os'] == "linux" and node['kernel']['release'] >= "2.6.27"
+  node.override['ntp']['ntpdate']['disable'] = false
   include_recipe "ntp::disable"
+  include_recipe "ntp::ntpdate"
+else
+  include_recipe "ntp"
 end

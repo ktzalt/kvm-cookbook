@@ -1,8 +1,8 @@
 # packages to install for kvm tuning
-case platform
-when 'ubuntu', 'debian'
+case node['platform_family']
+when 'debian'
   default["kvm"]["host"]["tuning"]["packages"] = %w(ebtables kvm-ipxe)
-when 'centos', 'redhat', 'scientific'
+when 'rhel' 
   default["kvm"]["host"]["tuning"]["packages"] = %w(ebtables gpxe-roms-qemu)
 else
   raise 'unsupported platform'

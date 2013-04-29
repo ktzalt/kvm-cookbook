@@ -18,7 +18,7 @@
 # limitations under the License.
 #
 
-node[:kvm][:host][:packages].each do |pkg|
+node["kvm"]["host"]["packages"].each do |pkg|
   package pkg do
     action :install
   end

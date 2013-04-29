@@ -20,7 +20,7 @@
 
 include_recipe "kvm::default"
 
-node[:kvm][:host][:tuning][:packages].each do |pkg|
+node["kvm"]["host"]["tuning"]["packages"].each do |pkg|
   package pkg do
     action :install
   end
@@ -41,15 +41,17 @@ if node['cpu']["0"]['flags'].include?("ept") and node['kernel']['release'] < "3.
 end
 
 ## Include some useful modules
-case node[:platform]
+case node["platform_family"]
 when 'debian'
-  include_recipe "modules"
+  unless node["platform"] == "ubuntu"
+    include_recipe "modules"
 
-  # vhost_net enhance networking performance.
-  # libvirt detect and use it when module is loaded.
-  modules "vhost_net"
-  # The module is set to load in /etc/default/qemu-kvm instead in Ubuntu
-when 'centos', 'redhat', 'scientific'
+    # vhost_net enhance networking performance.
+    # libvirt detect and use it when module is loaded.
+    modules "vhost_net"
+    # The module is set to load in /etc/default/qemu-kvm instead in Ubuntu
+  end
+when 'rhel'
   # vhost_net installed by default
   # https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/ch11s02.html
 end
@@ -68,7 +70,7 @@ node.default["cpu"]["governor"] = "performance"
 include_recipe "cpu"
 
 # enable/disable ksm. only works on ubuntu so far
-case node[:platform]
+case node["platform"]
 when 'ubuntu'
   service "qemu-kvm" do
     action :nothing

@@ -18,37 +18,36 @@
 # limitations under the License.
 #
 
-include_recipe "kvm::default"
+include_recipe 'kvm::default'
 
-node["kvm"]["host"]["tuning"]["packages"].each do |pkg|
+node['kvm']['host']['tuning']['packages'].each do |pkg|
   package pkg do
     action :install
   end
 end
 
-
 ## Disable swapping when processor is INTEL with EPT instructions
 # EPT doen't update "last access" in memory.
 # In this case, Linux can put in swap a very used page.
 # This has been fixed in 3.6 and backport on 3.5
-if node['cpu']["0"]['flags'].include?("ept") and node['kernel']['release'] < "3.5"
-  include_recipe "sysctl"
+if node['cpu']['0']['flags'].include?('ept') && node['kernel']['release'] < '3.5'
+  include_recipe 'sysctl'
 
-  sysctl "vm.swappiness" do
-    value "0"
+  sysctl 'vm.swappiness' do
+    value '0'
     action :set
   end
 end
 
 ## Include some useful modules
-case node["platform_family"]
+case node['platform_family']
 when 'debian'
-  unless node["platform"] == "ubuntu"
-    include_recipe "modules"
+  unless node['platform'] == 'ubuntu'
+    include_recipe 'modules'
 
     # vhost_net enhance networking performance.
     # libvirt detect and use it when module is loaded.
-    modules "vhost_net"
+    modules 'vhost_net'
     # The module is set to load in /etc/default/qemu-kvm instead in Ubuntu
   end
 when 'rhel'
@@ -56,40 +55,38 @@ when 'rhel'
   # https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/ch11s02.html
 end
 
-
-#include_recipe "sysfs"
-#sysfs "Tuning ondemand cpufreq governor" do
+# include_recipe "sysfs"
+# sysfs "Tuning ondemand cpufreq governor" do
 #  name "devices/system/cpu/cpufreq/ondemand/sampling_down_factor"
 #  value "100"
-#end
+# end
 
 ## Don't change the cpu frequency.
 # clock drift (in some cases)
 # Drop performances http://lists.gnu.org/archive/html/qemu-devel/2012-03/msg00842.html
-node.default["cpu"]["governor"] = "performance"
-include_recipe "cpu"
+node.default['cpu']['governor'] = 'performance'
+include_recipe 'cpu'
 
 # enable/disable ksm. only works on ubuntu so far
-case node["platform"]
+case node['platform']
 when 'ubuntu'
-  service "qemu-kvm" do
+  service 'qemu-kvm' do
     action :nothing
     supports :restart => true
   end
 
-  template "/etc/default/qemu-kvm" do
-    source "default.qemu-kvm.erb"
-    owner "root"
-    group "root"
+  template '/etc/default/qemu-kvm' do
+    source 'default.qemu-kvm.erb'
+    owner 'root'
+    group 'root'
     mode 00644
-    notifies :restart, "service[qemu-kvm]"
+    notifies :restart, 'service[qemu-kvm]'
   end
 end
 
-include_recipe "sysfs"
-sysfs "Enable transparent huge pages" do
-  name "kernel/mm/transparent_hugepage/enabled"
-  value "always"
-  only_if do File.exists?("/sys/kernel/mm/transparent_hugepage/enabled") end
+include_recipe 'sysfs'
+sysfs 'Enable transparent huge pages' do
+  name 'kernel/mm/transparent_hugepage/enabled'
+  value 'always'
+  only_if { File.exist?('/sys/kernel/mm/transparent_hugepage/enabled') }
 end
-

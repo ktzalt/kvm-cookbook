@@ -1,9 +1,9 @@
 # packages to install as kvm host
 case node['platform_family']
 when 'debian'
-  default["kvm"]["host"]["packages"] = %w(qemu-kvm libvirt-bin)
+  default['kvm']['host']['packages'] = %w(qemu-kvm libvirt-bin)
 when 'rhel'
-  default["kvm"]["host"]["packages"] = %w(qemu-kvm libvirt)
+  default['kvm']['host']['packages'] = %w(qemu-kvm libvirt)
 else
-  raise 'unsupported platform'
+  fail 'unsupported platform'
 end

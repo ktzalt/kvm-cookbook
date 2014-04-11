@@ -1,4 +1,4 @@
-# KVM 
+# KVM [![Build Status](https://travis-ci.org/Youscribe/kvm-cookbook.svg?branch=master)](https://travis-ci.org/Youscribe/kvm-cookbook)
 
 ## DESCRIPTION
 

@@ -18,10 +18,9 @@
 # limitations under the License.
 #
 
-node['block_device'].select{|device,info| device =~ /^.d.$/ and info['size'].to_i > 0}.each do |device,info|
-  sysfs "io scheduler" do
+node['block_device'].select { |device, info| device =~ /^.d.$/ and info['size'].to_i > 0 }.each do |device, info|
+  sysfs 'io scheduler' do
     name "block/#{device}/queue/scheduler"
-    value node["kvm"]["guest"]["tuning"]["io_scheduler"]
+    value node['kvm']['guest']['tuning']['io_scheduler']
   end
 end
-   

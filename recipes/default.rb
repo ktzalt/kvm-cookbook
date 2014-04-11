@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-if node['virtualization'].has_key?("role") and node['virtualization']['role'] == "guest" and node['virtualization']['system'] == "kvm"
-  include_recipe "kvm::guest"
-elsif node['virtualization'].has_key?("role") and node['virtualization']['role'] == "host" and node['virtualization']['system'] == "kvm"
-  include_recipe "kvm::host"
+if node['virtualization'].key?('role') && node['virtualization']['role'] == 'guest' && node['virtualization']['system'] == 'kvm'
+  include_recipe 'kvm::guest'
+elsif node['virtualization'].key?('role') && node['virtualization']['role'] == 'host' && node['virtualization']['system'] == 'kvm'
+  include_recipe 'kvm::host'
 end

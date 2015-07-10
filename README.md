@@ -1,4 +1,6 @@
-# KVM [![Build Status](https://travis-ci.org/Youscribe/kvm-cookbook.svg?branch=master)](https://travis-ci.org/Youscribe/kvm-cookbook)
+# KVM 
+[![Build Status](https://travis-ci.org/Youscribe/kvm-cookbook.svg?branch=master)](https://travis-ci.org/Youscribe/kvm-cookbook)
+[![CK Version](http://img.shields.io/cookbook/v/kvm.svg)](https://supermarket.chef.io/cookbooks/kvm)
 
 ## DESCRIPTION
 

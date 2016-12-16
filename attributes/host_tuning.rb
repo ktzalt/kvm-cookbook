@@ -1,7 +1,7 @@
 # packages to install for kvm tuning
 case node['platform_family']
 when 'debian'
-  default['kvm']['host']['tuning']['packages'] = %w(ebtables kvm-ipxe)
+  default['kvm']['host']['tuning']['packages'] = %w(ebtables ipxe-qemu)
 when 'rhel'
   default['kvm']['host']['tuning']['packages'] = %w(ebtables gpxe-roms-qemu)
 else

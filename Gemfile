@@ -9,6 +9,6 @@ end
 
 group :integration do
   gem 'berkshelf'
-  gem 'test-kitchen', '~> 1.1'
   gem 'kitchen-vagrant', '~> 0.13'
+  gem 'test-kitchen', '~> 1.1'
 end

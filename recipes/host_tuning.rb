@@ -50,7 +50,7 @@ when 'debian'
     modules 'vhost_net'
     # The module is set to load in /etc/default/qemu-kvm instead in Ubuntu
   end
-when 'rhel'
+#when 'rhel'
   # vhost_net installed by default
   # https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/ch11s02.html
 end
@@ -79,7 +79,7 @@ when 'ubuntu'
     source 'default.qemu-kvm.erb'
     owner 'root'
     group 'root'
-    mode 00644
+    mode 0644
     notifies :restart, 'service[qemu-kvm]'
   end
 end

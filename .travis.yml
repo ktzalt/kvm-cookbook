@@ -7,6 +7,4 @@ script: bundle exec rake travis
 matrix:
   include:
   - rvm: 1.9.3
-    language: ruby
     gemfile: Gemfile-1.9.3
-    bundler_args: --without integration

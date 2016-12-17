@@ -2,16 +2,12 @@
 
 # Style tests. Rubocop and Foodcritic
 namespace :style do
-  if RUBY_VERSION.to_i < 2
-    puts '>>>>> rubocop requires Ruby version >= 2.0.0' unless ENV['CI']
-  else
-    begin
-      require 'rubocop/rake_task'
-      desc 'Run Ruby style checks'
-      RuboCop::RakeTask.new(:ruby)
-    rescue LoadError
-      puts '>>>>> Rubocop gem not loaded, omitting tasks' unless ENV['CI']
-    end
+  begin
+    require 'rubocop/rake_task'
+    desc 'Run Ruby style checks'
+    RuboCop::RakeTask.new(:ruby)
+  rescue LoadError
+    puts '>>>>> Rubocop gem not loaded, omitting tasks' unless ENV['CI']
   end
 
   begin

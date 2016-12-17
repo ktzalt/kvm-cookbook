@@ -4,4 +4,11 @@ rvm:
   - 1.9.3
   - 2.0.0
   - 2.1.0
+matrix:
+  exclude:
+  - rvm: 1.9.3
+    gemfile: Gemfile
+  include:
+  - rvm: 1.9.3
+    gemfile: Gemfile-1.9.3
 script: bundle exec rake travis

@@ -1,8 +1,8 @@
 name 'kvm'
 maintainer 'Guilhem Lettron'
 maintainer_email 'guilhem.lettron@youscribe.com'
-source_url 'https://github.com/Youscribe/kvm-cookbook.git'
-issues_url 'https://github.com/Youscribe/kvm-cookbook/issues'
+source_url 'https://github.com/Youscribe/kvm-cookbook.git' if respond_to?(:source_url)
+issues_url 'https://github.com/Youscribe/kvm-cookbook/issues' if respond_to?(:issues_url)
 license 'Apache 2.0'
 description 'Installs/Configures/tuning kvm'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
